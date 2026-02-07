@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/build.func)
+source <(curl -fsSL https://raw.githubusercontent.com/KrakenBinary/ProxmoxVE/refs/heads/main/misc/build.func)
+# source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/build.func)
 # Copyright (c) 2026 KrakenBinary
 # Author: KrakenBinary
 # License: MIT | https://github.com/KrakenBinary/ProxmoxVE/raw/main/LICENSE
