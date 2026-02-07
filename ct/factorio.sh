@@ -12,7 +12,6 @@ var_ram="${var_ram:-4096}"
 var_disk="${var_disk:-2}"
 var_os="${var_os:-debian}"
 var_version="${var_version:-13}"
-#var_unprivileged="${var_unprivileged:-1}"
 
 header_info "$APP"
 variables
@@ -29,8 +28,6 @@ function update_script() {
   fi
   msg_info "Updating $APP LXC"
   $STD /opt/factorio/update_factorio.sh
-  #$STD apt update
-  #$STD apt -y upgrade
   msg_ok "Updated $APP LXC"
   msg_ok "Updated successfully!"
   exit
@@ -50,7 +47,6 @@ $STD apt-get install -y wget tar jq xz-utils sudo cron pv || {
 msg_info "Customizing Container: Downloading Factorio"
 
 $STD wget --show-progress -O /opt/factorio_headless.tar https://factorio.com/get-download/stable/headless/linux64
-#$STD mkdir -p /opt/factorio
 $STD tar -xJf /opt/factorio_headless.tar
 $STD rm /opt/factorio_headless.tar
 
@@ -58,15 +54,8 @@ msg_info "Customizing Container: Finalizing"
 
 $STD mkdir -p /opt/factorio/saves /opt/factorio/mods /opt/factorio_backups
 
-$STD getent group
-$STD getent passwd
-#$STD groupadd -f factorio          # -f: don't fail if group exists
-#$STD useradd -m -d /opt/factorio -s /bin/bash -g factorio factorio
-#$STD adduser --system --group --home /opt/factorio --no-create-home factorio
 $STD groupadd factorio
 $STD useradd -g factorio -d /opt/factorio -s /bin/bash factorio
-#$STD useradd factorio
-#$STD usermod -aG factorio factorio
 $STD chown -R factorio:factorio /opt/factorio
 
 $STD cp /opt/factorio/data/server-settings.example.json /opt/factorio/data/server-settings.json
