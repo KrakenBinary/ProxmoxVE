@@ -36,7 +36,6 @@ function update_script() {
 start
 build_container
 
-
 msg_info "Customizing Container: Installing dependencies"
 $STD apt-get update
 $STD apt-get install -y wget tar jq xz-utils sudo cron pv || {
@@ -53,11 +52,9 @@ $STD rm /opt/factorio_headless.tar
 msg_info "Customizing Container: Finalizing"
 
 $STD mkdir -p /opt/factorio/saves /opt/factorio/mods /opt/factorio_backups
-
 $STD groupadd factorio
 $STD useradd -g factorio -d /opt/factorio -s /bin/bash factorio
 $STD chown -R factorio:factorio /opt/factorio
-
 $STD cp /opt/factorio/data/server-settings.example.json /opt/factorio/data/server-settings.json
 
 read -p "Enter server name: " SERVER_NAME
@@ -158,7 +155,6 @@ $STD chown factorio:factorio /opt/factorio/update_factorio.sh
 $STD bash -c '(crontab -l ; echo "0 3 * * * /opt/factorio/update_factorio.sh >> /var/log/factorio-update.log 2>&1") | crontab -'
 
 msg_ok "Customized Container"
-
 
 description
 
